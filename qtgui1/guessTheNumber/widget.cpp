@@ -3,7 +3,7 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <cstdlib> // to generate random numbers
-#include <time.h> // to seed a generator
+#include <ctime> // to seed a generator
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
@@ -22,7 +22,9 @@ Widget::Widget(QWidget *parent) :
     qDebug() << "Secret number is: " << QString::number(secretNumber);
 
     // show nothing in message label
-    setMessage(" ");
+    setMessage("Let's play");
+    // activate guess button when game starts
+    ui->guessButton->setDisabled(false);
 }
 
 Widget::~Widget()
@@ -53,14 +55,26 @@ void Widget::on_guessButton_clicked()
         QMessageBox::information(this, "All right!", "You did it well",
                                  QMessageBox::Ok);
         setMessage("Click Start Over to play again :)");
+
+        // disable guess button when succeded
+        ui->guessButton->setDisabled(true);
     }
 }
 
 void Widget::on_startOverButton_clicked()
 {
-    //
+    // restart the game
+    ui->guessButton->setDisabled(false);
+    // put the spinbox back to 1
+    ui->spinBox->setValue(1);
+    // regenerate the random number
+    secretNumber = rand() % 10 + 1;
+    qDebug() << "Secret number is: " << QString::number(secretNumber);
+    // set message label to next game
+    ui->messageLabel->setText("Let's play again!");
 }
 
+// UTILITY
 void Widget::setMessage(QString message)
 {
     ui->messageLabel->setText(message);
