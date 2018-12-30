@@ -26,7 +26,9 @@ private:
     int secretNumber, guessNumber,
         lowerNum, higherNum;
 
+    //utilities
     void setMessage(QString);
+    void generateRandomNumber();
 };
 
 #endif // WIDGET_H

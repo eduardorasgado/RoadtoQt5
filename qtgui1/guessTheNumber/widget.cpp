@@ -16,10 +16,7 @@ Widget::Widget(QWidget *parent) :
     // It is the seeder
     srand(time(NULL));
 
-    // generate the random number (1 - 10)
-    secretNumber = rand() % 10 +1;
-    // debuggin in qt console
-    qDebug() << "Secret number is: " << QString::number(secretNumber);
+    generateRandomNumber();
 
     // show nothing in message label
     setMessage("Let's play");
@@ -68,8 +65,7 @@ void Widget::on_startOverButton_clicked()
     // put the spinbox back to 1
     ui->spinBox->setValue(1);
     // regenerate the random number
-    secretNumber = rand() % 10 + 1;
-    qDebug() << "Secret number is: " << QString::number(secretNumber);
+    generateRandomNumber();
     // set message label to next game
     ui->messageLabel->setText("Let's play again!");
 }
@@ -78,4 +74,12 @@ void Widget::on_startOverButton_clicked()
 void Widget::setMessage(QString message)
 {
     ui->messageLabel->setText(message);
+}
+
+void Widget::generateRandomNumber()
+{
+    // generate the random number (1 - 10)
+    secretNumber = rand() % 10 + 1;
+    // debugging in qt console
+    qDebug() << "Secret number is: " << QString::number(secretNumber);
 }
