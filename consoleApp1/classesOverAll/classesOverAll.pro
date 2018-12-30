@@ -10,4 +10,5 @@ SOURCES += \
 
 HEADERS += \
     rectangle.h \
-    parallelpiped.h
+    parallelpiped.h \
+    square.h

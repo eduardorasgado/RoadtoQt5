@@ -2,6 +2,7 @@
 #include <memory>
 #include "rectangle.h"
 #include "parallelpiped.h"
+#include "square.h"
 
 template< typename T>
 inline void print(T A) { std::cout << A << std::endl; }
@@ -30,6 +31,10 @@ int main()
     Parallelpiped p1{w, l, h};
 
     print("The parallelpiped  volume is: " + stringify(p1.getVolume()));
+
+    // side: 20
+    Square mysq{l};
+    print("Square area: "+  stringify(mysq.getArea()));
 
     return 0;
 }
