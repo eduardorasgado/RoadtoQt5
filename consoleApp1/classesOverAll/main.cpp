@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include "rectangle.h"
+#include "parallelpiped.h"
 
 template< typename T>
 inline void print(T A) { std::cout << A << std::endl; }
@@ -8,22 +9,6 @@ inline void print(T A) { std::cout << A << std::endl; }
 template <typename T>
 inline std::string stringify(T A) { return std::to_string(A); }
 
-
-class Parallelpiped
-{
-private:
-    Rectangle r;
-    int height;
-
-public:
-    Parallelpiped(int &w, int &l, int &h): r{w, l}, height{h}
-    { std::cout << "A parallelpiped has been created" << std::endl; }
-
-    int getVolume()
-    {
-        return r.getArea() * height;
-    }
-};
 
 std::shared_ptr<Rectangle> getRectangle(int&, int&);
 

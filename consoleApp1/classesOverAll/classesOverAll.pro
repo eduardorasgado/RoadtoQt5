@@ -5,7 +5,9 @@ CONFIG -= qt
 
 SOURCES += \
         main.cpp \
-    rectangle.cpp
+    rectangle.cpp \
+    parallelpiped.cpp
 
 HEADERS += \
-    rectangle.h
+    rectangle.h \
+    parallelpiped.h
