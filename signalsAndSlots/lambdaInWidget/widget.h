@@ -17,6 +17,8 @@ public:
 
 private slots:
     void changeText();
+    void changeTextb2();
+    void changeTextb3();
 
 private:
     Ui::Widget *ui;
