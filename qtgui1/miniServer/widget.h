@@ -15,8 +15,16 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_startServerButton_clicked();
+
 private:
     Ui::Widget *ui;
+    u_int16_t port;
+    std::string address;
+    std::string message;
+
+    void startServer();
 };
 
 #endif // WIDGET_H

@@ -3,8 +3,8 @@ Modern C++ desktop GUI development labs using famous Qt5 framework and QtCreator
 
 ## Annotations
 
-Some packages works by other non qt libs integration. So I use conan package manager
-as a easy to integrate build method.
+Some packages work by other non qt libs integration. So I use conan package manager
+as an easy way to integrate building method.
 
 ### CONAN PACKAGES AND QT(QtCreator) INTEGRATION
 
