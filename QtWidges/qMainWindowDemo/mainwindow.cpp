@@ -48,7 +48,19 @@ void MainWindow::addCentralWidget()
     message.setIcon(QMessageBox::Critical);
     //  | is a sepparator, we not use commas here
     message.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    // if you click in close then default choice is cancel
     message.setDefaultButton(QMessageBox::Cancel);
+
+    // question message box
+    questionmsg.setMinimumSize(100, 400);
+    questionmsg.setWindowTitle("Https is optional");
+    questionmsg.setText("You can active the https protocol.");
+    questionmsg.setInformativeText("If you have a ssl certificated locally"
+                                   "installed you can use it for your server. Do you want"
+                                   "to take it?");
+    questionmsg.setIcon(QMessageBox::Question);
+    questionmsg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    questionmsg.setDefaultButton(QMessageBox::Cancel);
 
 }
 
@@ -59,7 +71,9 @@ void MainWindow::addMenubar()
     filemenu->addAction(quitAction);
     filemenu->addAction(msgAction);
 
-    menuBar()->addMenu("Edit");
+    auto editmenu = menuBar()->addMenu("Edit");
+    editmenu->addAction(msg2Action);
+
     menuBar()->addMenu("Settings");
     menuBar()->addMenu("Help");
 }
@@ -105,6 +119,13 @@ void MainWindow::initFileMenuActions()
             qDebug() << "User just CANCEL it(2)";
         }
     });
+
+    msg2Action = new QAction("Show information msg");
+    // connect the action label in edit menu option to a
+    // action in window
+    connect(msg2Action, &QAction::triggered,[=](){
+        this->largeScaleAction();
+    });
 }
 
 void MainWindow::clickButton()
@@ -136,4 +157,27 @@ void MainWindow::initSignalsAndSlots()
     connect(button1, &QPushButton::clicked,[=](){
         this->clickButton();
     });
+}
+
+void MainWindow::largeScaleAction()
+{
+    // information message
+    qDebug() << "A process is started";
+    int ret = QMessageBox::information(this, "The server is on",
+                                       "Look at your browser at localhost:8080. Do you,"
+                                       "Want to keep the server on?",
+                                       QMessageBox::Ok | QMessageBox::Cancel);
+    if(ret == QMessageBox::Ok)
+    {
+        qDebug() << "Button OK was pressed in INFORMATION";
+        // question message
+        auto uc = questionmsg.exec();
+        if(uc == QMessageBox::Ok) {
+            qDebug() << "[QUESTION ANSWER: OK]";
+            // warning message box
+            QMessageBox::warning(this, "Ops!",
+                                 "You do not have such certificates in your machine",
+                                 QMessageBox::Ok);
+        }
+    }
 }

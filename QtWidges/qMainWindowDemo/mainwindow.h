@@ -23,8 +23,10 @@ private:
     // actions
     QAction *quitAction;
     QAction *msgAction;
+    QAction *msg2Action;
 
     QMessageBox message;
+    QMessageBox questionmsg;
 
     QSize sizeHint() const;
     void addCentralWidget();
@@ -33,6 +35,7 @@ private:
     void initActions();
     void initFileMenuActions();
     void initSignalsAndSlots();
+    void largeScaleAction();
 };
 
 #endif // MAINWINDOW_H
