@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QPushButton>
+#include <QMessageBox>
 #include <QAction>
 
 class MainWindow : public QMainWindow
@@ -13,11 +14,15 @@ public:
     MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void clickButton();
+
 private:
     // slots
     QPushButton *button1;
     // actions
     QAction *quitAction;
+    QMessageBox message;
 
     QSize sizeHint() const;
     void addCentralWidget();
@@ -25,6 +30,7 @@ private:
     void initStatusBar();
     void initActions();
     void initFileMenuActions();
+    void initSignalsAndSlots();
 };
 
 #endif // MAINWINDOW_H

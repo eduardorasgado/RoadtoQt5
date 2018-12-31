@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QPushButton>
+#include <QMessageBox>
 #include <QDebug>
 #include <QMenuBar>
 #include <QStatusBar>
@@ -18,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     initActions();
     addMenubar();
     initStatusBar();
+    initSignalsAndSlots();
 
 }
 
@@ -37,6 +39,17 @@ void MainWindow::addCentralWidget()
     // Adding a central widget
     button1 = new QPushButton("Click me", this);
     setCentralWidget(button1);
+
+    // Defining the custom mesage box
+    message.setMinimumSize(100, 400);
+    message.setWindowTitle("Attention");
+    message.setText("You have clicked the push button and this occurs.");
+    message.setInformativeText("Did you know?");
+    message.setIcon(QMessageBox::Critical);
+    //  | is a sepparator, we not use commas here
+    message.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    message.setDefaultButton(QMessageBox::Cancel);
+
 }
 
 void MainWindow::addMenubar()
@@ -75,3 +88,33 @@ void MainWindow::initFileMenuActions()
     });
 }
 
+void MainWindow::clickButton()
+{
+    // this is called because signal connection
+    qDebug() << "Button is pressed";
+
+    // Message box executed
+    auto userElection = message.exec();
+
+    // capturing user choise
+    if(userElection == QMessageBox::Ok)
+    {
+        qDebug() << "User option was OK";
+    }
+    else if (userElection == QMessageBox::Cancel)
+    {
+        qDebug() << "User option was CANCEL";
+    }
+    else {
+        qDebug() << "User Option was NOTHING";
+    }
+ }
+
+// events
+void MainWindow::initSignalsAndSlots()
+{
+    //initializing click event
+    connect(button1, &QPushButton::clicked,[=](){
+        this->clickButton();
+    });
+}
