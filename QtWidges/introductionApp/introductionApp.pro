@@ -26,13 +26,12 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        widget.cpp
+    rockwidget.cpp
 
 HEADERS += \
-        widget.h
+    rockwidget.h
 
-FORMS += \
-        widget.ui
+FORMS +=
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

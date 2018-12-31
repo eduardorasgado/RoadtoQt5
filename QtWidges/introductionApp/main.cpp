@@ -1,4 +1,4 @@
-#include "widget.h"
+#include "rockwidget.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
@@ -7,8 +7,8 @@ int main(int argc, char *argv[])
 
     //main Application wrapper
     QApplication a(argc, argv);
-    Widget w;
-    w.show();
+    RockWidget wt;
+    wt.show();
 
     // it starts an event loop
     return a.exec();
