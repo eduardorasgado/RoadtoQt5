@@ -9,6 +9,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     RockWidget wt;
     wt.setWindowTitle("Rocky");
+
     wt.show();
 
     // it starts an event loop
