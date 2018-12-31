@@ -3,7 +3,8 @@
 #include <QDebug>
 #include <QMenuBar>
 #include <QStatusBar>
-#include <QAction>
+#include <QAction> // quit action
+#include <QApplication> // contents all interaction witl app
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,10 +12,13 @@ MainWindow::MainWindow(QWidget *parent)
     // title
     this->setWindowTitle("My Application");
 
-    // calling initializer methods
+    // --calling initializer methods--
     addCentralWidget();
+    // declaring actions with qaction
+    initActions();
     addMenubar();
     initStatusBar();
+
 }
 
 MainWindow::~MainWindow()
@@ -31,14 +35,16 @@ QSize MainWindow::sizeHint() const
 void MainWindow::addCentralWidget()
 {
     // Adding a central widget
-    auto button = new QPushButton("Click me", this);
-    setCentralWidget(button);
+    button1 = new QPushButton("Click me", this);
+    setCentralWidget(button1);
 }
 
 void MainWindow::addMenubar()
 {
     // Add menus
-    menuBar()->addMenu("File");
+    auto filemenu = menuBar()->addMenu("File");
+    filemenu->addAction(quitAction);
+
     menuBar()->addMenu("Edit");
     menuBar()->addMenu("Settings");
     menuBar()->addMenu("Help");
@@ -49,5 +55,23 @@ void MainWindow::initStatusBar()
     // Add status bar message
     // the message is shown for 3 seconds
     statusBar()->showMessage("Welcome to  the app", 3000);
+}
+
+void MainWindow::initActions()
+{
+    // this method calls all the actions before app is already for user
+    initFileMenuActions();
+}
+
+void MainWindow::initFileMenuActions()
+{
+    // Quit action
+    quitAction = new QAction("Quit");
+
+    // connecting the action with slot and signal
+    connect(quitAction, &QAction::triggered,[=](){
+        // close the app
+        QApplication::quit();
+    });
 }
 

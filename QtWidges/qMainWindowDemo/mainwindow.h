@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPushButton>
+#include <QAction>
 
 class MainWindow : public QMainWindow
 {
@@ -12,10 +14,17 @@ public:
     ~MainWindow();
 
 private:
+    // slots
+    QPushButton *button1;
+    // actions
+    QAction *quitAction;
+
     QSize sizeHint() const;
     void addCentralWidget();
     void addMenubar();
     void initStatusBar();
+    void initActions();
+    void initFileMenuActions();
 };
 
 #endif // MAINWINDOW_H
