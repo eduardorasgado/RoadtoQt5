@@ -57,6 +57,7 @@ void MainWindow::addMenubar()
     // Add menus
     auto filemenu = menuBar()->addMenu("File");
     filemenu->addAction(quitAction);
+    filemenu->addAction(msgAction);
 
     menuBar()->addMenu("Edit");
     menuBar()->addMenu("Settings");
@@ -78,6 +79,7 @@ void MainWindow::initActions()
 
 void MainWindow::initFileMenuActions()
 {
+    // FOR FILE MENU
     // Quit action
     quitAction = new QAction("Quit");
 
@@ -85,6 +87,23 @@ void MainWindow::initFileMenuActions()
     connect(quitAction, &QAction::triggered,[=](){
         // close the app
         QApplication::quit();
+    });
+
+    msgAction = new QAction("Show a message");
+
+    connect(msgAction, &QAction::triggered, [=](){
+        // in case user click on show a message option in menu
+        auto userChoise = QMessageBox::critical(this, "Title",
+                                        "Something went wrong",
+                                        QMessageBox::Ok | QMessageBox::Cancel);
+        if(userChoise == QMessageBox::Ok)
+        {
+            qDebug() << "User choise is OK(2)";
+        }
+        else if(userChoise == QMessageBox::Cancel)
+        {
+            qDebug() << "User just CANCEL it(2)";
+        }
     });
 }
 

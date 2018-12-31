@@ -22,6 +22,8 @@ private:
     QPushButton *button1;
     // actions
     QAction *quitAction;
+    QAction *msgAction;
+
     QMessageBox message;
 
     QSize sizeHint() const;
