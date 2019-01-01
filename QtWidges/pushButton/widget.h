@@ -15,10 +15,13 @@ public:
     ~Widget();
 
 private:
-    QPushButton * button;
+    QPushButton *button;
+    QPushButton *button2;
     QFont buttonFont;
 
+    void initGeneralButtons();
     void signalSlotsConnections();
+    QSize sizeHint() const;
 };
 
 #endif // WIDGET_H
