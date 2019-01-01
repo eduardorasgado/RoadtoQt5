@@ -25,7 +25,11 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
-
+    // deleting all the pointers
+    delete button1;
+    delete quitAction;
+    delete msgAction;
+    delete msg2Action;
 }
 
 QSize MainWindow::sizeHint() const
