@@ -6,13 +6,15 @@
 #include <QLabel>
 #include <QLineEdit>
 #include <QDebug>
+#include <vector>
+#include <QMessageBox>
 
 class Widget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit Widget(QWidget *parent = 0);
+    Widget(QWidget *parent = 0);
     ~Widget();
 
 private:
@@ -31,6 +33,9 @@ private:
     void createLineEdits();
     void submitButton();
     void connectingSignalsAndSlots();
+    void getForm();
+    void validatingFormData(QString& firstname, QString& lastName,
+                            QString& city, std::vector<QString> &validation_msgs);
 };
 
 #endif // WIDGET_H

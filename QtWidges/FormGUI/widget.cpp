@@ -80,14 +80,61 @@ void Widget::submitButton()
 
 void Widget::connectingSignalsAndSlots()
 {
+    getForm();
+}
+
+void Widget::getForm()
+{
     // connecting button and capturing form data
     connect(submitBtn, &QPushButton::clicked,[=](){
+        // messages
+        //QString validation_msgs[3];
+        std::vector<QString> validation_msgs;
 
         auto firstname = firstNameLineEdit->text();
         auto lastName = lastNameLineEdit->text();
         auto city = cityLineEdit->text();
 
-        qDebug() << "firstname: " << firstname << "| lastname: " << lastName << " | city: " << city;
+        validatingFormData(firstname, lastName, city, validation_msgs);
+
+        // in case all data is well set
+        if( validation_msgs.size() == 0)
+        {
+            qDebug() << "firstname: " << firstname << "| lastname: " << lastName << " | city: " << city;
+            QMessageBox::information(this, "Welcome", "Your data is saved.",
+                                     QMessageBox::Ok);
+        }
+        else {
+            // in case something is empty, show msg
+            for(auto &msg : validation_msgs)
+            {
+                qDebug() << "NOT SET: " << msg;
+                QMessageBox::critical(this, "Not Set", "Please fill the "+msg+" data input",
+                                      QMessageBox::Ok);
+            }
+        }
     });
 }
 
+void Widget::validatingFormData(QString& firstname, QString& lastName,
+                        QString& city, std::vector<QString> &validation_msgs)
+{
+    // validator
+    auto validateString = [](auto data)->bool{
+        if(data.isEmpty()) { return false; }
+        return true;
+    };
+
+    // validating first name
+    auto v_firstname = validateString(firstname);
+    if(!v_firstname)
+    { validation_msgs.push_back("FirstName"); }
+
+    // validating lastName
+    auto v_lastname = validateString(lastName);
+    if(!v_lastname) { validation_msgs.push_back("LastName"); }
+
+    // validating city
+    auto v_city = validateString(city);
+    if(!v_city) { validation_msgs.push_back("City"); }
+}
