@@ -19,13 +19,18 @@ private:
     QFont labelFont;
     QLabel *firstNameLabel;
     QLabel *lastNameLabel;
+    QLabel *cityLabel;
     QLineEdit *firstNameLineEdit;
     QLineEdit *lastNameLineEdit;
+    QLineEdit *cityLineEdit;
+    QPushButton *submitBtn;
 
     QSize sizeHint() const;
     void createForm();
     void createLabels();
     void createLineEdits();
+    void submitButton();
+    void connectingSignalsAndSlots();
 };
 
 #endif // WIDGET_H
