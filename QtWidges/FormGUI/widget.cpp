@@ -81,6 +81,11 @@ void Widget::submitButton()
 void Widget::connectingSignalsAndSlots()
 {
     getForm();
+    // all line signals
+    for(auto signal : {firstNameLineEdit, lastNameLineEdit, cityLineEdit})
+    {
+        lineSignal(signal);
+    }
 }
 
 void Widget::getForm()
@@ -103,6 +108,8 @@ void Widget::getForm()
             qDebug() << "firstname: " << firstname << "| lastname: " << lastName << " | city: " << city;
             QMessageBox::information(this, "Welcome", "Your data is saved.",
                                      QMessageBox::Ok);
+
+            // TODO: cleaning the inputs
         }
         else {
             // in case something is empty, show msg
@@ -137,4 +144,18 @@ void Widget::validatingFormData(QString& firstname, QString& lastName,
     // validating city
     auto v_city = validateString(city);
     if(!v_city) { validation_msgs.push_back("City"); }
+}
+
+void Widget::lineSignal(QLineEdit *signal)
+{
+    // Resnpond to signals from QQLineEdit
+    // cursorPositionChanged
+    connect(signal, &QLineEdit::cursorPositionChanged, [=](){
+        qDebug() << "The current cursor position is: " << signal->cursorPosition();
+    });
+
+    // editingFinished: emmited when user clicks enter or when line edit looses focus
+    connect(signal, &QLineEdit::editingFinished, [=](){
+        qDebug() << signal->text() << " in line.";
+    });
 }

@@ -36,6 +36,7 @@ private:
     void getForm();
     void validatingFormData(QString& firstname, QString& lastName,
                             QString& city, std::vector<QString> &validation_msgs);
+    void lineSignal(QLineEdit *signal);
 };
 
 #endif // WIDGET_H
