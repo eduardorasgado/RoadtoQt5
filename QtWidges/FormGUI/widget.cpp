@@ -59,16 +59,19 @@ void Widget::createLineEdits()
     firstNameLineEdit = new QLineEdit(this);
     firstNameLineEdit->setMinimumSize(200, 20); //box size
     firstNameLineEdit->move(110, 22);
+    firstNameLineEdit->setPlaceholderText("Eduardo");
 
     //lastName
     lastNameLineEdit = new QLineEdit(this);
     lastNameLineEdit->setMinimumSize(200, 20);
     lastNameLineEdit->move(110, 54);
+    lastNameLineEdit->setPlaceholderText("Rasgado Ruiz");
 
     // city line edit
     cityLineEdit = new QLineEdit(this);
     cityLineEdit->setMinimumSize(200, 20);
     cityLineEdit->move(110, 86);
+    cityLineEdit->setPlaceholderText("Oaxaca, MX");
 }
 
 void Widget::submitButton()
@@ -158,4 +161,24 @@ void Widget::lineSignal(QLineEdit *signal)
     connect(signal, &QLineEdit::editingFinished, [=](){
         qDebug() << signal->text() << " in line.";
     });
+
+    // when enter is pressed in an input
+    connect(signal, &QLineEdit::returnPressed, [=](){
+        qDebug() << "[Return Pressed].";
+    });
+
+    // when change between inputs
+    connect(signal, &QLineEdit::selectionChanged,[=](){
+        qDebug() << "[[Selection changed]]";
+    });
+
+    connect(signal, &QLineEdit::textChanged, [=](){
+        qDebug() << "Text actually is: " << signal->text();
+        // taking actual text and replace space to -
+        signal->setText(signal->text().replace(" ", "-"));
+    });
+    /* others:
+     *
+     * textEdited
+    */
 }
