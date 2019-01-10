@@ -17,8 +17,11 @@ public:
 private:
     QFont textFont;
     QLabel *mLabel;
+    QTextEdit *textEdit;
 
     void initLabels();
+    void initText();
+    QSize sizeHint() const;
 };
 
 #endif // WIDGET_H
