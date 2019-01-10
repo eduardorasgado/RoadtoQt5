@@ -10,6 +10,9 @@ Widget::Widget(QWidget *parent)
 
     // signals and slots
     initSignalsAndSlots();
+
+    // avoiding to change the window size
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 Widget::~Widget()
@@ -119,6 +122,18 @@ void Widget::initSignalsAndSlots()
     // plain text button
     connect(buttons->at(6), &QPushButton::clicked, [=](){
         textEdit->setPlainText("This is some plain text to set");
+    });
+
+    // grab plain text button
+    connect(buttons->at(7), &QPushButton::clicked, [=](){
+        qDebug() << "The plain text inside the text editor box is: "
+               << textEdit->toPlainText();
+    });
+
+    // grab html button
+    connect(buttons->at(8), &QPushButton::clicked, [=](){
+        qDebug() << "The html inside the text edito is: "
+                 << textEdit->toHtml();
     });
 }
 
