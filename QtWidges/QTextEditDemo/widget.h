@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QDebug>
 #include <vector>
+#include <memory>
 
 class Widget : public QWidget
 {
@@ -24,7 +25,8 @@ private:
     QFont textFont;
     QLabel *mLabel;
     QTextEdit *textEdit;
-    std::vector<QPushButton*> buttons;
+    // buttons container
+    std::shared_ptr<std::vector<QPushButton*>> buttons;
 
     void initLabels();
     void initButtons();
