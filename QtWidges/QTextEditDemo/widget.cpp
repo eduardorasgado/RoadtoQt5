@@ -49,6 +49,17 @@ void Widget::initButtons()
     buttons.push_back(new QPushButton("Redo", this));
     buttons.at(4)->setMinimumSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     buttons.at(4)->move(110, 300);
+
+    // Html
+    buttons.push_back(new QPushButton("Html", this));
+    buttons.at(5)->setMinimumSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    buttons.at(5)->move(210, 300);
+
+    // Plain text
+    buttons.push_back(new QPushButton("Plain Text", this));
+    buttons.at(6)->setMinimumSize(BUTTON_WIDTH*2, BUTTON_HEIGHT);
+    buttons.at(6)->move(10, 340);
+
 }
 
 void Widget::initText()
@@ -87,6 +98,16 @@ void Widget::initSignalsAndSlots()
     // redo button
     connect(buttons.at(4), &QPushButton::clicked, [=](){
         textEdit->redo();
+    });
+
+    // html button
+    connect(buttons.at(5), &QPushButton::clicked, [=](){
+        textEdit->setHtml("<h1>Your Data:</h1><p>This is my name: <strong>Eduardo</strong></p>");
+    });
+
+    // plain text button
+    connect(buttons.at(6), &QPushButton::clicked, [=](){
+        textEdit->setPlainText("This is some plain text to set");
     });
 }
 
