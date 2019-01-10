@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QDebug>
+#include <vector>
 
 class Widget : public QWidget
 {
@@ -15,12 +16,20 @@ public:
     Widget(QWidget *parent = 0);
     ~Widget();
 private:
+
+    int WINDOW_WIDTH{310};
+    int WINDOW_HEIGHT{300};
+    int BUTTON_WIDTH{50};
+    int BUTTON_HEIGHT{25};
     QFont textFont;
     QLabel *mLabel;
     QTextEdit *textEdit;
+    std::vector<QPushButton*> buttons;
 
     void initLabels();
+    void initButtons();
     void initText();
+    void initSignalsAndSlots();
     QSize sizeHint() const;
 };
 
