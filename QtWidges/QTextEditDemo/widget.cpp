@@ -54,6 +54,21 @@ void Widget::initSignalsAndSlots()
         qDebug("Text Changed");
     });
 
+    // copy button
+    connect(buttons.at(0), &QPushButton::clicked, [=](){
+        textEdit->selectAll();
+        textEdit->copy();
+    });
+
+    // cut button
+    connect(buttons.at(1), &QPushButton::clicked, [=](){
+        textEdit->cut();
+    });
+
+    // past button
+    connect(buttons.at(2), &QPushButton::clicked, [=](){
+        textEdit->paste();
+    });
 }
 
 QSize Widget::sizeHint() const
