@@ -2,6 +2,10 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QTextEdit>
+#include <QPushButton>
+#include <QLabel>
+#include <QDebug>
 
 class Widget : public QWidget
 {
@@ -10,6 +14,11 @@ class Widget : public QWidget
 public:
     Widget(QWidget *parent = 0);
     ~Widget();
+private:
+    QFont textFont;
+    QLabel *mLabel;
+
+    void initLabels();
 };
 
 #endif // WIDGET_H
