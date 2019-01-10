@@ -18,7 +18,7 @@ public:
 private:
 
     int WINDOW_WIDTH{310};
-    int WINDOW_HEIGHT{300};
+    int WINDOW_HEIGHT{350};
     int BUTTON_WIDTH{50};
     int BUTTON_HEIGHT{25};
     QFont textFont;

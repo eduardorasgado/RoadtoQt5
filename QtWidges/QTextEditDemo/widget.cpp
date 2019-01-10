@@ -39,6 +39,16 @@ void Widget::initButtons()
     buttons.push_back(new QPushButton("Paste", this));
     buttons.at(2)->setMinimumSize(BUTTON_WIDTH, BUTTON_HEIGHT);
     buttons.at(2)->move(210, 260);
+
+    // undo
+    buttons.push_back(new QPushButton("Undo", this));
+    buttons.at(3)->setMinimumSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    buttons.at(3)->move(10, 300);
+
+    // redo
+    buttons.push_back(new QPushButton("Redo", this));
+    buttons.at(4)->setMinimumSize(BUTTON_WIDTH, BUTTON_HEIGHT);
+    buttons.at(4)->move(110, 300);
 }
 
 void Widget::initText()
@@ -68,6 +78,15 @@ void Widget::initSignalsAndSlots()
     // past button
     connect(buttons.at(2), &QPushButton::clicked, [=](){
         textEdit->paste();
+    });
+
+    // undo button
+    connect(buttons.at(3), &QPushButton::clicked, [=](){
+        textEdit->undo();
+    });
+    // redo button
+    connect(buttons.at(4), &QPushButton::clicked, [=](){
+        textEdit->redo();
     });
 }
 
