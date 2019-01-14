@@ -6,6 +6,9 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    mainMenu = new QMenuBar(this);
+    initMenuActions();
+    initMenu();
     initH2BoxLayout();
     initV2BoxLayout();
 }
@@ -15,10 +18,37 @@ Widget::~Widget()
     delete ui;
 }
 
+void Widget::initMenu()
+{
+    mainMenu->setMinimumWidth(this->geometry().width());
+    auto fileMenu = mainMenu->addMenu("File");
+    fileMenu->addAction(quitAction);
+    auto editMenu = mainMenu->addMenu("Edit");
+    auto helpMenu = mainMenu->addMenu("Help");
+}
+
+void Widget::initMenuActions()
+{
+    // For file menu
+    // quit action
+    quitAction = new QAction("Quit");
+
+    // connecting signals to actions
+    connect(quitAction, &QAction::triggered,[=](){
+        // quit the widget
+        auto selection = QMessageBox::information(this, "Are you serious?", "Your are "
+                                                                            "near to close this app",
+                                                  QMessageBox::Ok, QMessageBox::No);
+        if(selection == QMessageBox::Ok)
+        {
+            QApplication::quit();
+        }
+    });
+
+}
+
 void Widget::initH2BoxLayout()
 {
-    // we can do the same for QVBoxLayout
-
     // make easy to handle buttons in layout
     h2_layout = new QHBoxLayout();
 
@@ -39,4 +69,15 @@ void Widget::initH2BoxLayout()
 void Widget::initV2BoxLayout()
 {
     //
+    v2_layout = new QVBoxLayout();
+
+    auto v2_btns = std::vector<QWidget*>{ui->pushButton, ui->pushButton_2,
+                                        ui->pushButton_3, ui->pushButton_4,
+                                        ui->pushButton_5};
+
+    for(auto& b : v2_btns)
+    {
+        v2_layout->addWidget(b);
+    }
+    //setLayout(v2_layout);
 }
