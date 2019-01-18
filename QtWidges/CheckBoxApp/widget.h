@@ -28,6 +28,8 @@ private slots:
 
     void on_SaveAll_btn_clicked();
 
+    void on_setstate_btn_clicked();
+
 private:
     Ui::Widget *ui;
     QButtonGroup *b_group;

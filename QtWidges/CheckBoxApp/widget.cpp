@@ -208,3 +208,35 @@ void Widget::on_SaveAll_btn_clicked()
         }
     }
 }
+
+void Widget::on_setstate_btn_clicked()
+{
+    // if check box is checked -> uncheck it
+    // if check box is unchecked -> check it
+
+    // Exclusive group box
+    if(ui->checkBox_windows->isChecked())
+    {
+        ui->checkBox_windows->setChecked(false);
+        ui->checkBox_mac->setChecked(true);
+    } else {
+        ui->checkBox_windows->setChecked(true);
+    }
+
+    // Non exclusive checkbox group
+    if(ui->checkBox_beer->isChecked())
+    {
+        ui->checkBox_beer->setChecked(false);
+    } else {
+        ui->checkBox_beer->setChecked(true);
+    }
+
+    // exclusive radio button
+    if(ui->radioButton_dog->isChecked())
+    {
+        ui->radioButton_dog->setChecked(false);
+        ui->radioButton_hamster->setChecked(true);
+    } else {
+        ui->radioButton_dog->setChecked(true);
+    }
+}
