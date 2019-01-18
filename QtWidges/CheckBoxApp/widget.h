@@ -23,6 +23,8 @@ private:
     Ui::Widget *ui;
     QButtonGroup *b_group;
     QButtonGroup *b_drink_group;
+    QButtonGroup *rb_pets_group;
+
     std::vector<QCheckBox*> *btns;
     void initBox();
     void initButtons();

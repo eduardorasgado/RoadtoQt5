@@ -24,6 +24,7 @@ Widget::~Widget()
 {
     delete ui;
     delete b_group;
+    delete b_drink_group;
     delete btns;
 }
 
@@ -44,6 +45,12 @@ void Widget::initBox()
     b_drink_group->addButton(ui->checkBox_coffee);
 
     b_drink_group->setExclusive(false);
+
+    // creating the radion button group
+    rb_pets_group = new QButtonGroup(this);
+    rb_pets_group->addButton(ui->radioButton_dog);
+    rb_pets_group->addButton(ui->radioButton_cat);
+    rb_pets_group->addButton(ui->radioButton_hamster);
 }
 
 void Widget::initButtons()
@@ -87,5 +94,13 @@ void Widget::initSignals()
                                  + drinks,
                                  QMessageBox::Ok);
 
+    });
+
+    // radion button group signals
+    connect(ui->save_pet_btn, &QPushButton::clicked, [=](){
+        auto btn_name = rb_pets_group->checkedButton()->text();
+        QMessageBox::information(this, "Your fav pet", "Your favorite pet is: a "
+                                 +btn_name,
+                                 QMessageBox::Ok);
     });
 }
