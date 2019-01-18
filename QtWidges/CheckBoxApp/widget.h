@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QButtonGroup>
 #include <QMessageBox>
+#include <memory>
 
 namespace Ui {
 class Widget;
@@ -20,7 +21,7 @@ public:
 private:
     Ui::Widget *ui;
     QButtonGroup *b_group;
-
+    std::vector<QCheckBox*> *btns;
     void initBox();
     void initButtons();
     void initSignals();

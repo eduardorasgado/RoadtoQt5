@@ -6,6 +6,14 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+
+    // initializing buttons in check box 1
+    btns = new std::vector<QCheckBox*>();
+
+    btns->push_back(ui->checkBox_windows);
+    btns->push_back(ui->checkBox_linux);
+    btns->push_back(ui->checkBox_mac);
+
     initBox();
     initButtons();
     initSignals();
@@ -15,6 +23,8 @@ Widget::Widget(QWidget *parent) :
 Widget::~Widget()
 {
     delete ui;
+    delete b_group;
+    delete btns;
 }
 
 void Widget::initBox()
@@ -35,10 +45,10 @@ void Widget::initButtons()
 
 void Widget::initSignals()
 {
-    std::vector<QCheckBox*> btns{ui->checkBox_windows, ui->checkBox_linux, ui->checkBox_mac};
+
     connect(ui->save_data_btn, &QPushButton::clicked ,[=](){
         //auto box_name = b_group->checkedButton()->text();
-        for(auto& btn : btns)
+        for(auto& btn : *btns)
         {
             if( b_group->checkedButton() == btn){
                 //auto option
