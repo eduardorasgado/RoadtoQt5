@@ -26,6 +26,8 @@ private slots:
 
     void on_radioButton_dog_toggled(bool checked);
 
+    void on_SaveAll_btn_clicked();
+
 private:
     Ui::Widget *ui;
     QButtonGroup *b_group;

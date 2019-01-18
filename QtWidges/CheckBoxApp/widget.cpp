@@ -131,3 +131,45 @@ void Widget::on_radioButton_dog_toggled(bool checked)
     checkingSlot("Dog radio button", checked);
 }
 
+
+void Widget::on_SaveAll_btn_clicked()
+{
+    // to store all the data from user
+    std::vector<std::string> data;
+
+    // os check box
+    auto os_btn = b_group->checkedButton();
+
+    // drinks check box
+    auto drinks_buttons = b_drink_group->buttons();
+
+    // pets radio button
+    auto pet_btn = rb_pets_group->checkedButton();
+
+    // getting strings
+    // conveting from QString to std::string
+    std::string utf8_os = os_btn->text().toUtf8().constData();
+
+    std::string utf8_drinks;
+    for(auto& b : drinks_buttons)
+    {
+        if(b->isChecked()){
+            utf8_drinks += b->text().toUtf8().constData();
+            utf8_drinks += " ";
+        }
+    }
+
+    std::string utf8_pet = pet_btn->text().toUtf8().constData();
+
+    // storing the requested data
+    data.push_back(utf8_os);
+    data.push_back(utf8_drinks);
+    data.push_back(utf8_pet);
+
+    // showing data in debugger
+    qDebug() << "DATA TO STORE: ";
+    for(auto& e : data)
+    {
+        qDebug() << QString::fromUtf8(e.c_str()) << " | ";
+    }
+}
