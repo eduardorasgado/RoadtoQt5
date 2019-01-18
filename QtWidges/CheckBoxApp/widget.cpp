@@ -25,6 +25,7 @@ Widget::~Widget()
     delete ui;
     delete b_group;
     delete b_drink_group;
+    delete rb_pets_group;
     delete btns;
 }
 
@@ -64,6 +65,7 @@ void Widget::initSignals()
     // saving OS data
     connect(ui->save_data_btn, &QPushButton::clicked ,[=](){
         //auto box_name = b_group->checkedButton()->text();
+        bool passed = false;
         for(auto& btn : *btns)
         {
             if( b_group->checkedButton() == btn){
@@ -71,7 +73,13 @@ void Widget::initSignals()
                 QMessageBox::information(this, "Your option", "Your option was: "
                                          + btn->text(),
                                      QMessageBox::Ok);
+                passed = true;
             }
+        }
+        if(!passed)
+        {
+            QMessageBox::information(this, "Your OS", "Please select something",
+                                     QMessageBox::Ok);
         }
     });
 
@@ -85,23 +93,35 @@ void Widget::initSignals()
                 drinks += b->text()+ ", ";
             }
         }
-        // in case a comma is at the end: ", ", delete it
-        //qDebug() << drinks.at(drinks.size()-1);
-        drinks = drinks.remove(drinks.size()-1, 1);
-        drinks = drinks.remove(drinks.size()-1, 1);
+        if(drinks.isEmpty()){
+            QMessageBox::information(this, "Your drink(s)", "Please select something",
+                                     QMessageBox::Ok);
+        }
+        else{
+            // in case a comma is at the end: ", ", delete it
+            //qDebug() << drinks.at(drinks.size()-1);
+            drinks = drinks.remove(drinks.size()-1, 1);
+            drinks = drinks.remove(drinks.size()-1, 1);
 
-        QMessageBox::information(this, "Your drink(s)", "Your option was: "
-                                 + drinks,
-                                 QMessageBox::Ok);
-
+            QMessageBox::information(this, "Your drink(s)", "Your option was: "
+                                     + drinks,
+                                     QMessageBox::Ok);
+        }
     });
 
     // radion button group signals
     connect(ui->save_pet_btn, &QPushButton::clicked, [=](){
-        auto btn_name = rb_pets_group->checkedButton()->text();
-        QMessageBox::information(this, "Your fav pet", "Your favorite pet is: a "
-                                 +btn_name,
-                                 QMessageBox::Ok);
+        if(rb_pets_group->checkedButton())
+        {
+            auto btn_name = rb_pets_group->checkedButton()->text();
+            QMessageBox::information(this, "Your fav pet", "Your favorite pet is: a "
+                                     +btn_name,
+                                     QMessageBox::Ok);
+        }
+        else{
+            QMessageBox::information(this, "Your fav pet", "Please select something",
+                                     QMessageBox::Ok);
+        }
     });
 }
 
@@ -146,30 +166,45 @@ void Widget::on_SaveAll_btn_clicked()
     // pets radio button
     auto pet_btn = rb_pets_group->checkedButton();
 
-    // getting strings
-    // conveting from QString to std::string
-    std::string utf8_os = os_btn->text().toUtf8().constData();
-
-    std::string utf8_drinks;
-    for(auto& b : drinks_buttons)
+    // handling errors
+    if(!os_btn || !pet_btn)
     {
-        if(b->isChecked()){
-            utf8_drinks += b->text().toUtf8().constData();
-            utf8_drinks += " ";
-        }
+        QMessageBox::critical(this, "Ops", "Please fill the options we give you",
+                                 QMessageBox::Ok);
     }
+    else {
+        // getting strings
+        // conveting from QString to std::string
+        std::string utf8_os = os_btn->text().toUtf8().constData();
 
-    std::string utf8_pet = pet_btn->text().toUtf8().constData();
+        std::string utf8_drinks;
+        // in case no button was checked
+        bool not_checked = true;
+        for(auto& b : drinks_buttons)
+        {
+            if(b->isChecked()){
+                utf8_drinks += b->text().toUtf8().constData();
+                utf8_drinks += " ";
+                not_checked = false;
+            }
+        }
+        if(not_checked){
+            QMessageBox::critical(this, "Ops", "Please fill the we options give you",
+                                     QMessageBox::Ok);
+        } else {
+            std::string utf8_pet = pet_btn->text().toUtf8().constData();
 
-    // storing the requested data
-    data.push_back(utf8_os);
-    data.push_back(utf8_drinks);
-    data.push_back(utf8_pet);
+            // storing the requested data
+            data.push_back(utf8_os);
+            data.push_back(utf8_drinks);
+            data.push_back(utf8_pet);
 
-    // showing data in debugger
-    qDebug() << "DATA TO STORE: ";
-    for(auto& e : data)
-    {
-        qDebug() << QString::fromUtf8(e.c_str()) << " | ";
+            // showing data in debugger
+            qDebug() << "DATA TO STORE: ";
+            for(auto& e : data)
+            {
+                qDebug() << QString::fromUtf8(e.c_str()) << " | ";
+            }
+        }
     }
 }
