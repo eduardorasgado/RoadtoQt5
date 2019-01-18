@@ -5,6 +5,7 @@
 #include <QButtonGroup>
 #include <QMessageBox>
 #include <memory>
+#include <QDebug>
 
 namespace Ui {
 class Widget;
@@ -21,6 +22,7 @@ public:
 private:
     Ui::Widget *ui;
     QButtonGroup *b_group;
+    QButtonGroup *b_drink_group;
     std::vector<QCheckBox*> *btns;
     void initBox();
     void initButtons();

@@ -36,6 +36,14 @@ void Widget::initBox()
     b_group->addButton(ui->checkBox_mac);
 
     b_group->setExclusive(true);
+
+    // create drink ckech btn group
+    b_drink_group = new QButtonGroup(this);
+    b_drink_group->addButton(ui->checkBox_beer);
+    b_drink_group->addButton(ui->checkBox_juice);
+    b_drink_group->addButton(ui->checkBox_coffee);
+
+    b_drink_group->setExclusive(false);
 }
 
 void Widget::initButtons()
@@ -46,6 +54,7 @@ void Widget::initButtons()
 void Widget::initSignals()
 {
 
+    // saving OS data
     connect(ui->save_data_btn, &QPushButton::clicked ,[=](){
         //auto box_name = b_group->checkedButton()->text();
         for(auto& btn : *btns)
@@ -57,5 +66,26 @@ void Widget::initSignals()
                                      QMessageBox::Ok);
             }
         }
+    });
+
+    // saving Drink data
+    connect(ui->save_dring_btn, &QPushButton::clicked, [=](){
+        auto box_selected = b_drink_group->buttons();
+        QString drinks;
+        for(auto& b : box_selected)
+        {
+            if(b->isChecked()){
+                drinks += b->text()+ ", ";
+            }
+        }
+        // in case a comma is at the end: ", ", delete it
+        //qDebug() << drinks.at(drinks.size()-1);
+        drinks = drinks.remove(drinks.size()-1, 1);
+        drinks = drinks.remove(drinks.size()-1, 1);
+
+        QMessageBox::information(this, "Your drink(s)", "Your option was: "
+                                 + drinks,
+                                 QMessageBox::Ok);
+
     });
 }

@@ -96,7 +96,7 @@
      <item>
       <widget class="QPushButton" name="save_dring_btn">
        <property name="text">
-        <string>PushButton</string>
+        <string>Save</string>
        </property>
       </widget>
      </item>
