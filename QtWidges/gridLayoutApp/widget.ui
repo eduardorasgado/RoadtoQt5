@@ -65,19 +65,6 @@
     <string>Five</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button6">
-   <property name="geometry">
-    <rect>
-     <x>256</x>
-     <y>130</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Six</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="button9">
    <property name="geometry">
     <rect>
@@ -89,19 +76,6 @@
    </property>
    <property name="text">
     <string>Nine</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button8">
-   <property name="geometry">
-    <rect>
-     <x>166</x>
-     <y>160</y>
-     <width>80</width>
-     <height>25</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Eight</string>
    </property>
   </widget>
   <widget class="QPushButton" name="button7">
@@ -120,14 +94,20 @@
   <widget class="QPushButton" name="button3">
    <property name="geometry">
     <rect>
-     <x>244</x>
-     <y>92</y>
+     <x>250</x>
+     <y>90</y>
      <width>80</width>
      <height>25</height>
     </rect>
    </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
    <property name="text">
-    <string>THree</string>
+    <string>Three</string>
    </property>
   </widget>
  </widget>
