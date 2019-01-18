@@ -19,6 +19,13 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_checkBox_windows_toggled(bool checked);
+
+    void on_checkBox_beer_toggled(bool checked);
+
+    void on_radioButton_dog_toggled(bool checked);
+
 private:
     Ui::Widget *ui;
     QButtonGroup *b_group;
@@ -29,6 +36,7 @@ private:
     void initBox();
     void initButtons();
     void initSignals();
+    void checkingSlot(QString, bool&) const;
 };
 
 #endif // WIDGET_H

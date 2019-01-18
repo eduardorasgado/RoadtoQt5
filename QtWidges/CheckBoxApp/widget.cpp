@@ -104,3 +104,30 @@ void Widget::initSignals()
                                  QMessageBox::Ok);
     });
 }
+
+void Widget::checkingSlot(QString box, bool &checked) const
+{
+    if(checked) { qDebug() << box+" Checkbox is checked"; }
+    else { qDebug() << box+" Checkbox is not checked"; }
+}
+
+
+/* created in qt designer by right click in checkbox and click on
+ * go to slot
+*/
+void Widget::on_checkBox_windows_toggled(bool checked)
+{
+    // whenever  the check box is selected or undo selected
+    checkingSlot("Windows", checked);
+}
+
+void Widget::on_checkBox_beer_toggled(bool checked)
+{
+    checkingSlot("Beer", checked);
+}
+
+void Widget::on_radioButton_dog_toggled(bool checked)
+{
+    checkingSlot("Dog radio button", checked);
+}
+
