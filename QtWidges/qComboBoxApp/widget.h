@@ -2,6 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QDebug>
+#include <QMessageBox>
 
 namespace Ui {
 class Widget;
@@ -15,8 +17,14 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_pushButton_capture_val_clicked();
+
+    void on_pushButton_set_val_clicked();
+
 private:
     Ui::Widget *ui;
+    void initComboBox();
 };
 
 #endif // WIDGET_H
