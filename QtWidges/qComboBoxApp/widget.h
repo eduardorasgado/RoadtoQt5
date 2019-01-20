@@ -22,8 +22,13 @@ private slots:
 
     void on_pushButton_set_val_clicked();
 
+    void on_comboBox_currentIndexChanged(const QString &arg1);
+
+    void on_comboBox_currentIndexChanged(int index);
+
 private:
     Ui::Widget *ui;
+    int maxIndex;
     void initComboBox();
 };
 

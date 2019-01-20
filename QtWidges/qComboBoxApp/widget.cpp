@@ -16,17 +16,23 @@ Widget::~Widget()
 
 void Widget::initComboBox()
 {
+    // adding fixed items to combo box
     ui->comboBox->addItem("Linux");
     ui->comboBox->addItem("Windows");
     ui->comboBox->addItem("Mac OS");
     ui->comboBox->addItem("Free BSD");
     ui->comboBox->addItem("Solaris");
+    ui->comboBox->addItem("Add your own...");
+
+    maxIndex = ui->comboBox->count();
 }
 
 void Widget::on_pushButton_capture_val_clicked()
 {
+    // in fixed selections
     auto comboContent = ui->comboBox->currentText();
-    qDebug() << "The current selectedd is: "
+
+    qDebug() << "The current selected is: "
              << comboContent << ", index is: "
              << QString::number(ui->comboBox->currentIndex());
 
@@ -39,4 +45,25 @@ void Widget::on_pushButton_set_val_clicked()
 {
     // set item programatically
     ui->comboBox->setCurrentIndex(0);
+}
+
+void Widget::on_comboBox_currentIndexChanged(const QString &arg1)
+{
+    //qDebug() << "Actual combo box text is: " << arg1;
+}
+
+void Widget::on_comboBox_currentIndexChanged(int index)
+{
+    // if it is not the user customizable then not editable
+    ui->comboBox->setEditable(false);
+    //qDebug() << "Actual combobox index is: " << index;
+    //qDebug() << "Max is: " << maxIndex;
+
+    // in case of users own selection
+    if(index == maxIndex-1){
+        // in case index is the last element->make editable
+
+        // make the combo box able to be edited
+        ui->comboBox->setEditable(true);
+    }
 }
