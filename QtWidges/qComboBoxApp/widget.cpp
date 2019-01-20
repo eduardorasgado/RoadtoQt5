@@ -31,13 +31,20 @@ void Widget::on_pushButton_capture_val_clicked()
 {
     // in fixed selections
     auto comboContent = ui->comboBox->currentText();
+    if(comboContent == "Add your own..."){
+        // reject if customizable is not set
+        QMessageBox::critical(this, "Not an Option", "Please, write your OS"
+                                    " then press ENTER to save and select it.",
+                              QMessageBox::Ok);
+    }
+    else {
+        qDebug() << "The current selected is: "
+                 << comboContent << ", index is: "
+                 << QString::number(ui->comboBox->currentIndex());
 
-    qDebug() << "The current selected is: "
-             << comboContent << ", index is: "
-             << QString::number(ui->comboBox->currentIndex());
-
-    QMessageBox::information(this, "Your OS", "You selected: "+comboContent,
-                             QMessageBox::Ok);
+        QMessageBox::information(this, "Your OS", "You selected: "+comboContent,
+                                 QMessageBox::Ok);
+    }
 
 }
 
