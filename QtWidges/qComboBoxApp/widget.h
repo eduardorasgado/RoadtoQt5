@@ -26,6 +26,8 @@ private slots:
 
     void on_comboBox_currentIndexChanged(int index);
 
+    void on_pushButton_get_val_clicked();
+
 private:
     Ui::Widget *ui;
     int maxIndex;

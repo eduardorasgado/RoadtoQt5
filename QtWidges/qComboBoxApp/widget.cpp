@@ -74,3 +74,13 @@ void Widget::on_comboBox_currentIndexChanged(int index)
         ui->comboBox->setEditable(true);
     }
 }
+
+void Widget::on_pushButton_get_val_clicked()
+{
+    qDebug() << "The combo box currently has: " <<
+                QString::number(ui->comboBox->count()) << " items. They are: ";
+    for(int i = 0;i < ui->comboBox->count(); ++i)
+    {
+        qDebug() << QString::number(i) << ": " << ui->comboBox->itemText(i);
+    }
+}
