@@ -10,6 +10,10 @@ Widget::Widget(QWidget *parent) :
     // multiselection in list using ctrl + click
     ui->list_assignments
             ->setSelectionMode(QAbstractItemView::ExtendedSelection);
+    // drag and drop item sorting
+    //ui->list_assignments->setDragDropMode(QAbstractItemView::InternalMove);
+    //ui->list_assignments->setDragEnabled(false);
+
 }
 
 Widget::~Widget()
@@ -110,31 +114,68 @@ void Widget::on_button_delete_assignment_clicked()
 {
     // delete item
     auto selectedItems = ui->list_assignments->selectedItems();
-    auto message = createMessage(selectedItems);
-    auto confirm = QMessageBox::question(this, "Delete an assignment",
-                                             message,
-                                             QMessageBox::Ok | QMessageBox::No);
-    if(confirm == QMessageBox::Ok){
-        if(ui->list_assignments->selectedItems().count() == 1)
-        {
-            qDebug() << "one  item";
-            // if it is just one element, we will remove it
-            ui->list_assignments->takeItem(ui->list_assignments->currentRow());
-        } else {
-            // in case it is a list of items selected
-            // getting list of selected items
-            for(auto& e : ui->list_assignments->selectedItems())
+    if(selectedItems.count() > 0)
+    {
+        auto message = createMessage(selectedItems);
+        auto confirm = QMessageBox::question(this, "Delete an assignment",
+                                                 message,
+                                                 QMessageBox::Ok | QMessageBox::No);
+        if(confirm == QMessageBox::Ok){
+            if(ui->list_assignments->selectedItems().count() == 1)
             {
-                // if it is one and directly we show use
-                // removing the element
-                auto actualRow = ui->list_assignments->row(e);
-                // removing the row
-                ui->list_assignments->takeItem(actualRow);
+                // if it is just one element, we will remove it
+                ui->list_assignments->takeItem(ui->list_assignments->currentRow());
+            } else {
+                // in case it is a list of items selected
+                // getting list of selected items
+                for(auto& e : ui->list_assignments->selectedItems())
+                {
+                    // if it is one and directly we show use
+                    // removing the element
+                    auto actualRow = ui->list_assignments->row(e);
+                    // removing the row
+                    ui->list_assignments->takeItem(actualRow);
+                }
             }
         }
+        // verifying list not empty after deleting element.
+        // if it is, then hide buttons
+        if(ui->list_assignments->count() == 0) { showButtons(false); }
+    }else {
+        QMessageBox::critical(this, "Deleting elements",
+                                 "No elements were selected",
+                                 QMessageBox::Ok);
     }
-    // verifying list not empty after deleting element.
-    // if it is, then hide buttons
-    if(ui->list_assignments->count() == 0) { showButtons(false); }
+}
+
+void Widget::on_button_finish_assignment_clicked()
+{
+    auto selectedItems = ui->list_assignments->selectedItems();
+    if(selectedItems.count() != 0){
+        // actual row
+        auto actualRow = ui->list_assignments->currentRow();
+        // cannot finish more than one element at a time
+        if(selectedItems.count() > 1){
+            QMessageBox::information(this, "Finishing assignment",
+                                "Select one element at a time to finish them",
+                                     QMessageBox::Ok);
+        } else {
+            // first element in list of selected
+            auto actualText = ui->list_assignments->selectedItems()[0]->text();
+            // if clicked then remove the element in assignment list and
+            // pass the element to done list
+            ui->list_assignments->takeItem(actualRow);
+            ui->list_done->addItem(actualText);
+            // if no elements in assingment list
+            if(ui->list_assignments->count() == 0){ showButtons(false); }
+        }
+
+    } else {
+        // in case no elements were selected
+        QMessageBox::critical(this, "Finishing assingment",
+                              "No items were selected",
+                              QMessageBox::Ok);
+
+    }
 
 }
