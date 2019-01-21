@@ -2,6 +2,8 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include <QDebug>
+#include <QMessageBox>
 
 namespace Ui {
 class Widget;
@@ -18,9 +20,15 @@ public:
 private slots:
     void on_button_add_assignment_clicked();
 
+    void on_button_form_cancel_clicked();
+
+    void on_button_save_form_clicked();
+
 private:
     Ui::Widget *ui;
     void initUI();
+
+    void closeCreationForm();
 };
 
 #endif // WIDGET_H
