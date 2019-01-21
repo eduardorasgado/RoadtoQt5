@@ -146,7 +146,43 @@
          </widget>
         </item>
         <item>
-         <widget class="QListWidget" name="list_assignments"/>
+         <widget class="QListWidget" name="list_assignments">
+          <item>
+           <property name="text">
+            <string>asdasd asdada sada da</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>asda asdada da da</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>asda asda adadad</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>asd asdasdadgsdsfsdf</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>asdfsasad ad ada dasda</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>asdf sadfsadf fvervvrvt</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>fsrbhfdgf fghfghfgh fghf</string>
+           </property>
+          </item>
+         </widget>
         </item>
        </layout>
       </item>

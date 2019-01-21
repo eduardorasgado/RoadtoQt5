@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QDebug>
 #include <QMessageBox>
+#include <QListWidgetItem>
 
 namespace Ui {
 class Widget;
@@ -32,6 +33,7 @@ private:
 
     void closeCreationForm();
     void showButtons(bool);
+    QString createMessage(QList<QListWidgetItem*>);
 };
 
 #endif // WIDGET_H

@@ -7,6 +7,9 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     initUI();
+    // multiselection in list using ctrl + click
+    ui->list_assignments
+            ->setSelectionMode(QAbstractItemView::ExtendedSelection);
 }
 
 Widget::~Widget()
@@ -27,12 +30,13 @@ void Widget::initUI()
     {
         // hide buttons
         showButtons(false);
-        // hide form
-        ui->box_asg_form->setVisible(false);
-        // set place holders to inputs
-        ui->edit_title->setPlaceholderText("Math Homework");
-        ui->edit_description->setPlaceholderText("Is all about addition stuff...");
     }
+
+    // hide form
+    ui->box_asg_form->setVisible(false);
+    // set place holders to inputs
+    ui->edit_title->setPlaceholderText("Math Homework");
+    ui->edit_description->setPlaceholderText("Is all about addition stuff...");
 }
 
 void Widget::closeCreationForm()
@@ -46,6 +50,18 @@ void Widget::showButtons(bool state)
 {
     ui->button_delete_assignment->setVisible(state);
     ui->button_selected_assignment->setVisible(state);
+}
+
+QString Widget::createMessage(QList<QListWidgetItem *> selectedItems)
+{
+    // message when items will be deleted
+    QString message = "Are you sure to delete this assignment?";
+    if(selectedItems.count() >1) {
+        message = " Are you sure to delete this group of "+
+                QString::number(selectedItems.count())
+                +" assigments?";
+    }
+    return message;
 }
 
 void Widget::on_button_form_cancel_clicked()
@@ -87,11 +103,29 @@ void Widget::on_button_save_form_clicked()
 void Widget::on_button_delete_assignment_clicked()
 {
     // delete item
+    auto selectedItems = ui->list_assignments->selectedItems();
+    auto message = createMessage(selectedItems);
     auto confirm = QMessageBox::question(this, "Delete an assignment",
-                                             "Are you sure to delete this assignment?",
+                                             message,
                                              QMessageBox::Ok | QMessageBox::No);
     if(confirm == QMessageBox::Ok){
-        ui->list_assignments->takeItem(ui->list_assignments->currentRow());
+        if(ui->list_assignments->selectedItems().count() == 1)
+        {
+            qDebug() << "one  item";
+            // if it is just one element, we will remove it
+            ui->list_assignments->takeItem(ui->list_assignments->currentRow());
+        } else {
+            // in case it is a list of items selected
+            // getting list of selected items
+            for(auto& e : ui->list_assignments->selectedItems())
+            {
+                // if it is one and directly we show use
+                // removing the element
+                auto actualRow = ui->list_assignments->row(e);
+                // removing the row
+                ui->list_assignments->takeItem(actualRow);
+            }
+        }
     }
     // verifying list not empty after deleting element.
     // if it is, then hide buttons
