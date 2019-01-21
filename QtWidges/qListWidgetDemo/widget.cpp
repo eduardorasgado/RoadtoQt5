@@ -83,3 +83,18 @@ void Widget::on_button_save_form_clicked()
     }
 
 }
+
+void Widget::on_button_delete_assignment_clicked()
+{
+    // delete item
+    auto confirm = QMessageBox::question(this, "Delete an assignment",
+                                             "Are you sure to delete this assignment?",
+                                             QMessageBox::Ok | QMessageBox::No);
+    if(confirm == QMessageBox::Ok){
+        ui->list_assignments->takeItem(ui->list_assignments->currentRow());
+    }
+    // verifying list not empty after deleting element.
+    // if it is, then hide buttons
+    if(ui->list_assignments->count() == 0) { showButtons(false); }
+
+}

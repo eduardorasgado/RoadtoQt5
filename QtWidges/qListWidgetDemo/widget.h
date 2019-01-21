@@ -24,6 +24,8 @@ private slots:
 
     void on_button_save_form_clicked();
 
+    void on_button_delete_assignment_clicked();
+
 private:
     Ui::Widget *ui;
     void initUI();
