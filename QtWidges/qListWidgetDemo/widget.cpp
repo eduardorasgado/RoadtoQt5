@@ -32,6 +32,11 @@ void Widget::initUI()
         showButtons(false);
     }
 
+    if(ui->list_done->count() == 0){
+        //hidde button
+        ui->button_clean_done->setVisible(false);
+    }
+
     // hide form
     ui->box_asg_form->setVisible(false);
     // set place holders to inputs
@@ -49,7 +54,7 @@ void Widget::closeCreationForm()
 void Widget::showButtons(bool state)
 {
     ui->button_delete_assignment->setVisible(state);
-    ui->button_selected_assignment->setVisible(state);
+    ui->button_finish_assignment ->setVisible(state);
 }
 
 QString Widget::createMessage(QList<QListWidgetItem *> selectedItems)
@@ -79,10 +84,11 @@ void Widget::on_button_save_form_clicked()
         // then save item and hide and clean form
         // if inputs are not empty
         if((ui->edit_title->text() != "") &&
-                (ui->edit_description->text() != ""))
+                (ui->edit_description->toPlainText() != ""))
         {
             // save the assignment
-            auto assignment = ui->edit_title->text() + " : " + ui->edit_description->text();
+            auto assignment = ui->edit_title->text() + " : "
+                    + ui->edit_description->toPlainText();
             ui->list_assignments->addItem(assignment);
             // clear the form
             closeCreationForm();

@@ -31,9 +31,16 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="button_selected_assignment">
+      <widget class="QPushButton" name="button_finish_assignment">
        <property name="text">
-        <string>Selected Assignment</string>
+        <string>Finish Assignment</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_clean_done">
+       <property name="text">
+        <string>Clean Done List</string>
        </property>
       </widget>
      </item>
@@ -67,7 +74,14 @@
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="edit_description"/>
+           <widget class="QPlainTextEdit" name="edit_description">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
