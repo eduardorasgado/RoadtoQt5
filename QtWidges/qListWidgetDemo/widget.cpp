@@ -54,11 +54,15 @@ void Widget::showButtons()
     if(ui->list_assignments->count() == 0)
     {
         // hide buttons
-        ui->button_delete_assignment->setVisible(false);
-        ui->button_finish_assignment ->setVisible(false);
+        //ui->button_delete_assignment->setVisible(false);
+        //ui->button_finish_assignment ->setVisible(false);
+        ui->button_delete_assignment->setEnabled(false);
+        ui->button_finish_assignment->setEnabled(false);
     } else {
-        ui->button_delete_assignment->setVisible(true);
-        ui->button_finish_assignment ->setVisible(true);
+        //ui->button_delete_assignment->setVisible(true);
+        //ui->button_finish_assignment ->setVisible(true);
+        ui->button_delete_assignment->setEnabled(true);
+        ui->button_finish_assignment->setEnabled(true);
     }
 }
 
@@ -77,9 +81,11 @@ QString Widget::createMessage(QList<QListWidgetItem *> selectedItems)
 void Widget::cleanButtonState()
 {
     if(ui->list_done->count() > 0) {
-        ui->button_clean_done->setVisible(true);
+        //ui->button_clean_done->setVisible(true);
+        ui->button_clean_done->setEnabled(true);
     } else {
-        ui->button_clean_done->setVisible(false);
+        //ui->button_clean_done->setVisible(false);
+        ui->button_clean_done->setEnabled(false);
     }
 }
 
