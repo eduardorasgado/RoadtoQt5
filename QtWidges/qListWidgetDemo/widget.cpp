@@ -10,10 +10,6 @@ Widget::Widget(QWidget *parent) :
     // multiselection in list using ctrl + click
     ui->list_assignments
             ->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    // drag and drop item sorting
-    //ui->list_assignments->setDragDropMode(QAbstractItemView::InternalMove);
-    //ui->list_assignments->setDragEnabled(false);
-
 }
 
 Widget::~Widget()
@@ -214,5 +210,14 @@ void Widget::on_button_clean_done_clicked()
 void Widget::on_button_assignment_sort_clicked()
 {
     // enable drag and drop system
-    qDebug() << "enable sorting";
+    // if it is in sorting mode then stop it
+    if(ui->list_assignments->dragEnabled()){
+        // if drag and drop is enabled
+        ui->list_assignments->setDragEnabled(false);
+        ui->button_assignment_sort->setText("Sort my assignments");
+    } else {
+        // drag and drop item sorting
+        ui->list_assignments->setDragDropMode(QAbstractItemView::InternalMove);
+        ui->button_assignment_sort->setText("Stop sorting");
+    }
 }
