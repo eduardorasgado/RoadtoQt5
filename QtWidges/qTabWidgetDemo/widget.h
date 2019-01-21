@@ -23,6 +23,8 @@ public:
 private slots:
     void on_button_tab1_select_clicked();
 
+    void on_pushButton_new_section_clicked();
+
 private:
     Ui::Widget *ui;
     QWidget *widget_tab4;

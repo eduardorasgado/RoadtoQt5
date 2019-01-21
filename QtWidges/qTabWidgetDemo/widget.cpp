@@ -68,3 +68,9 @@ void Widget::initTabInCode()
     // to insert new tab in specific area between other tabs
     ui->tabWidget->insertTab(1, widget_tab4, "Tab 4");
 }
+
+void Widget::on_pushButton_new_section_clicked()
+{
+    // show a form to select user custom tab element
+    // TODO: Create logic to new tabs storing
+}
