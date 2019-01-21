@@ -4,6 +4,8 @@
 #include <QWidget>
 #include <QDebug>
 #include <QButtonGroup>
+#include <QVBoxLayout>
+#include <QPushButton>
 
 namespace Ui {
 class Widget;
@@ -25,6 +27,7 @@ private:
     QButtonGroup *p_languages_group;
 
     void initGroupBoxes();
+    void initTabInCode();
 };
 
 #endif // WIDGET_H
