@@ -6,6 +6,9 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    // initialize lists to store custo tabs
+    new_widgets = new QList<QWidget*>;
+    new_layouts = new QList<QVBoxLayout*>;
     initGroupBoxes();
     initTabInCode();
 }
@@ -38,10 +41,10 @@ void Widget::initTabInCode()
 {
     //creating a tab in code
     // Declare the widget
-    QWidget * widget_tab4 = new QWidget(this);
+    widget_tab4 = new QWidget(this);
 
     // Declare the layout for the widget
-    QVBoxLayout *layout_tab4 = new QVBoxLayout(this);
+    layout_tab4 = new QVBoxLayout(this);
     // adding elements
     layout_tab4->addWidget(new QPushButton("Button1", this));
     layout_tab4->addWidget(new QPushButton("Button2", this));
@@ -56,10 +59,12 @@ void Widget::initTabInCode()
     // adding a responsive spacer given the app widht and height
     layout_tab4->addSpacerItem(new QSpacerItem(this->width()/20,
                                                this->height()/10));
-
     // set the layout to the widget
     widget_tab4->setLayout(layout_tab4);
 
     // set the widget tab to tab container
-    ui->tabWidget->addTab(widget_tab4, "Tab 4");
+    //ui->tabWidget->addTab(widget_tab4, "Tab 4");
+
+    // to insert new tab in specific area between other tabs
+    ui->tabWidget->insertTab(1, widget_tab4, "Tab 4");
 }
