@@ -29,6 +29,7 @@ private:
     void initUI();
 
     void closeCreationForm();
+    void showButtons(bool);
 };
 
 #endif // WIDGET_H
