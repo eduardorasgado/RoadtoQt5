@@ -30,16 +30,10 @@ void Widget::on_button_add_assignment_clicked()
 void Widget::initUI()
 {
     //no elements in list
-    if(ui->list_assignments->count() == 0)
-    {
-        // hide buttons
-        showButtons(false);
-    }
+    showButtons();
 
-    if(ui->list_done->count() == 0){
-        //hidde button
-        ui->button_clean_done->setVisible(false);
-    }
+    // hidde clean done button
+    cleanButtonState();
 
     // hide form
     ui->box_asg_form->setVisible(false);
@@ -55,10 +49,17 @@ void Widget::closeCreationForm()
     ui->edit_description->clear();
 }
 
-void Widget::showButtons(bool state)
+void Widget::showButtons()
 {
-    ui->button_delete_assignment->setVisible(state);
-    ui->button_finish_assignment ->setVisible(state);
+    if(ui->list_assignments->count() == 0)
+    {
+        // hide buttons
+        ui->button_delete_assignment->setVisible(false);
+        ui->button_finish_assignment ->setVisible(false);
+    } else {
+        ui->button_delete_assignment->setVisible(true);
+        ui->button_finish_assignment ->setVisible(true);
+    }
 }
 
 QString Widget::createMessage(QList<QListWidgetItem *> selectedItems)
@@ -71,6 +72,15 @@ QString Widget::createMessage(QList<QListWidgetItem *> selectedItems)
                 +" assigments?";
     }
     return message;
+}
+
+void Widget::cleanButtonState()
+{
+    if(ui->list_done->count() > 0) {
+        ui->button_clean_done->setVisible(true);
+    } else {
+        ui->button_clean_done->setVisible(false);
+    }
 }
 
 void Widget::on_button_form_cancel_clicked()
@@ -96,10 +106,7 @@ void Widget::on_button_save_form_clicked()
             ui->list_assignments->addItem(assignment);
             // clear the form
             closeCreationForm();
-            if(ui->list_assignments->count() != 0){
-                // show the buttons
-                showButtons(true);
-            }
+            showButtons();
         } else {
             QMessageBox::information(this, "No data",
                                      "Please complete the form to save your assignment",
@@ -140,7 +147,7 @@ void Widget::on_button_delete_assignment_clicked()
         }
         // verifying list not empty after deleting element.
         // if it is, then hide buttons
-        if(ui->list_assignments->count() == 0) { showButtons(false); }
+        showButtons();
     }else {
         QMessageBox::critical(this, "Deleting elements",
                                  "No elements were selected",
@@ -167,7 +174,9 @@ void Widget::on_button_finish_assignment_clicked()
             ui->list_assignments->takeItem(actualRow);
             ui->list_done->addItem(actualText);
             // if no elements in assingment list
-            if(ui->list_assignments->count() == 0){ showButtons(false); }
+            showButtons();
+            // if elements the show clean done button
+            cleanButtonState();
         }
 
     } else {
@@ -178,4 +187,18 @@ void Widget::on_button_finish_assignment_clicked()
 
     }
 
+}
+
+void Widget::on_button_clean_done_clicked()
+{
+    // remove all items in done list
+    auto confirm = QMessageBox::question(this, "Clearing done list",
+                                         "Are you sure about deleting "
+                                         +QString::number(ui->list_done->count())
+                                         +" items?",
+                                         QMessageBox::Ok | QMessageBox::Cancel);
+    if(confirm == QMessageBox::Ok){
+        ui->list_done->clear();
+        cleanButtonState();
+    }
 }

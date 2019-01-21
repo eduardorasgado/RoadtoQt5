@@ -29,13 +29,16 @@ private slots:
 
     void on_button_finish_assignment_clicked();
 
+    void on_button_clean_done_clicked();
+
 private:
     Ui::Widget *ui;
     void initUI();
 
     void closeCreationForm();
-    void showButtons(bool);
+    void showButtons();
     QString createMessage(QList<QListWidgetItem*>);
+    void cleanButtonState();
 };
 
 #endif // WIDGET_H
