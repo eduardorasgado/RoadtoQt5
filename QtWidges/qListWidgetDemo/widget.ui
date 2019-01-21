@@ -37,13 +37,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="button_clean_done">
-       <property name="text">
-        <string>Clean Done List</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
    <item>
@@ -198,6 +191,13 @@
           </item>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="button_assignment_sort">
+          <property name="text">
+           <string>Sort my assignments</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -217,6 +217,13 @@
         </item>
         <item>
          <widget class="QListWidget" name="list_done"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="button_clean_done">
+          <property name="text">
+           <string>Clean Done List</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

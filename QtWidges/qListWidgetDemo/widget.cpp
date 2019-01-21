@@ -58,11 +58,13 @@ void Widget::showButtons()
         //ui->button_finish_assignment ->setVisible(false);
         ui->button_delete_assignment->setEnabled(false);
         ui->button_finish_assignment->setEnabled(false);
+        ui->button_assignment_sort->setEnabled(false);
     } else {
         //ui->button_delete_assignment->setVisible(true);
         //ui->button_finish_assignment ->setVisible(true);
         ui->button_delete_assignment->setEnabled(true);
         ui->button_finish_assignment->setEnabled(true);
+        ui->button_assignment_sort->setEnabled(true);
     }
 }
 
@@ -207,4 +209,10 @@ void Widget::on_button_clean_done_clicked()
         ui->list_done->clear();
         cleanButtonState();
     }
+}
+
+void Widget::on_button_assignment_sort_clicked()
+{
+    // enable drag and drop system
+    qDebug() << "enable sorting";
 }

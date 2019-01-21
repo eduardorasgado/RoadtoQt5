@@ -31,6 +31,8 @@ private slots:
 
     void on_button_clean_done_clicked();
 
+    void on_button_assignment_sort_clicked();
+
 private:
     Ui::Widget *ui;
     void initUI();
