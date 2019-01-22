@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <QDebug>
+#include <QTimer>
 
 namespace Ui {
 class MainWindow;
@@ -34,6 +35,8 @@ private slots:
     void on_actionAbout_triggered();
 
     void on_actionAbout_Qt_triggered();
+
+    void quitApp();
 
 private:
     Ui::MainWindow *ui;

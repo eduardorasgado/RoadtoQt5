@@ -22,16 +22,30 @@ void MainWindow::on_actionQuit_triggered()
                                          "are you sure?",
                                          QMessageBox::Ok | QMessageBox::No);
     if(confirm == QMessageBox::Ok){
-        QApplication::quit();
+        // closing app with a delay
+        // status bar comes with window
+        auto time = 3000;
+        statusBar()->showMessage("App will close in "
+                                 + QString::number(time/1000)
+                                 +" secs.");
+        QTimer::singleShot(time, this, SLOT(quitApp()));
     }
 }
 
 void MainWindow::on_actionCopy_triggered()
 {
     // select text then copy
-    qDebug() << "Copy action triggered";
+    //qDebug() << "Copy action triggered";
+    auto text = ui->textEdit->toPlainText();
+    auto words = text.split(" ");
+
     ui->textEdit->selectAll();
     ui->textEdit->copy();
+
+    // show a message for 2 secs
+    statusBar()->showMessage("Text copied. ("
+                             + QString::number(words.count())
+                             +") word(s) were copied", 2000);
 }
 
 void MainWindow::on_actionCut_triggered()
@@ -66,4 +80,9 @@ void MainWindow::on_actionAbout_triggered()
 void MainWindow::on_actionAbout_Qt_triggered()
 {
     QApplication::aboutQt();
+}
+
+void MainWindow::quitApp()
+{
+    QApplication::quit();
 }
