@@ -44,3 +44,26 @@ void MainWindow::on_actionPaste_triggered()
 {
     ui->textEdit->paste();
 }
+
+void MainWindow::on_actionUndo_triggered()
+{
+    ui->textEdit->undo();
+}
+
+void MainWindow::on_actionRedo_triggered()
+{
+    ui->textEdit->redo();
+}
+
+void MainWindow::on_actionAbout_triggered()
+{
+    // show a about message
+    QMessageBox::about(this, "EasyPad 1.0 2019", "This is a notepad like app"
+                             ", to learn how to create menus and window "
+                             "customization");
+}
+
+void MainWindow::on_actionAbout_Qt_triggered()
+{
+    QApplication::aboutQt();
+}
