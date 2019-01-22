@@ -7,6 +7,7 @@
 #include <QVBoxLayout>
 #include <QPushButton>
 #include <QList>
+#include <QMessageBox>
 
 namespace Ui {
 class Widget;
@@ -24,6 +25,8 @@ private slots:
     void on_button_tab1_select_clicked();
 
     void on_pushButton_new_section_clicked();
+
+    void on_pushButton_clicked();
 
 private:
     Ui::Widget *ui;
