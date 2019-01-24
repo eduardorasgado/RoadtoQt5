@@ -23,6 +23,7 @@ private slots:
 private:
     Ui::Widget *ui;
     InfoDialog *dialog;
+    void setLabelData(QString pos="", QString os="");
 };
 
 #endif // WIDGET_H

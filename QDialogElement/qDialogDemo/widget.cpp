@@ -6,6 +6,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
+    setLabelData();
 }
 
 Widget::~Widget()
@@ -28,9 +29,20 @@ void Widget::on_pushButton_provideinfo_clicked()
                   << position
                   << " | os is: "
                   << os;
+         setLabelData(position, os);
      }
      if(response == QDialog::Rejected)
      {
          qDebug() << "Dialog rejected";
+         // no data
+         auto nodata = "<No Data Assigned>";
+         setLabelData(nodata, nodata);
      }
 }
+
+void Widget::setLabelData(QString pos, QString os)
+{
+    ui->label_position->setText(pos);
+    ui->label_os->setText(os);
+}
+
