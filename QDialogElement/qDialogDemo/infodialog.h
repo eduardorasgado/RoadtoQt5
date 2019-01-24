@@ -32,6 +32,8 @@ private:
     QString position;
     QString favorite_os;
     QButtonGroup *os_group;
+
+    void clearFields();
 };
 
 #endif // INFODIALOG_H

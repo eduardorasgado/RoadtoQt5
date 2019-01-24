@@ -73,6 +73,8 @@ void Widget::initDialogs()
     connect(dialog_non_modal, &InfoDialog::rejected, [=](){
         //
         qDebug() << "[Dialog non modal was rejected]";
+        auto nodata = "<No Data Assigned>";
+        this->setLabelData(nodata);
     });
 }
 

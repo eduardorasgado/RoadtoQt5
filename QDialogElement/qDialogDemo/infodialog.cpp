@@ -36,6 +36,8 @@ void InfoDialog::on_pushButton_ok_clicked()
         //qDebug() << "info is: " << position << " | " << favorite_os;
     }
 
+    // to avoid keepin last dialog window info
+    clearFields();
     // when clicking ok quit the dialog
     accept();
 }
@@ -44,6 +46,22 @@ void InfoDialog::on_pushButton_cancel_clicked()
 {
     // the dialog has been rejected
     reject();
+}
+
+void InfoDialog::clearFields()
+{
+    qDebug() << "Clearing data fields...";
+    ui->lineEdit_position->clear();
+    // deactivate exclussiveness for a while
+    // and unchecking elements
+    QAbstractButton *checked = os_group->checkedButton();
+    if(checked)
+    {
+        os_group->setExclusive(false);
+        checked->setChecked(false);
+        os_group->setExclusive(true);
+    }
+
 }
 
 QString InfoDialog::getPosition() const
