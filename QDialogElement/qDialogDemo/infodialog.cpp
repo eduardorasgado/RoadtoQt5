@@ -33,7 +33,7 @@ void InfoDialog::on_pushButton_ok_clicked()
         {
             favorite_os = os_group->checkedButton()->text();
         }
-        qDebug() << "info is: " << position << " | " << favorite_os;
+        //qDebug() << "info is: " << position << " | " << favorite_os;
     }
 
     // when clicking ok quit the dialog

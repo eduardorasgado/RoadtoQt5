@@ -17,7 +17,14 @@
    <item>
     <widget class="QPushButton" name="pushButton_provideinfo">
      <property name="text">
-      <string>Provide info</string>
+      <string>Provide info: modal</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="pushButton_provide_nonmodal">
+     <property name="text">
+      <string>Provide info: Non modal</string>
      </property>
     </widget>
    </item>
@@ -47,6 +54,9 @@
         <widget class="QLabel" name="label_position">
          <property name="text">
           <string>TextLabel</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
