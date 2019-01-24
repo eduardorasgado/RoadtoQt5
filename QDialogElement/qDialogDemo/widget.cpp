@@ -18,5 +18,14 @@ void Widget::on_pushButton_provideinfo_clicked()
 {
      dialog = new InfoDialog(this);
      // show a dialog as a modal dialog
-     dialog->exec();
+     auto response = dialog->exec();
+     if(response == QDialog::Accepted)
+     {
+         //
+         qDebug() << "Dialog accepted";
+     }
+     if(response == QDialog::Rejected)
+     {
+         qDebug() << "Dialog rejected";
+     }
 }

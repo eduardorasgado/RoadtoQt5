@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "infodialog.h" // we should include the dialog manually
+#include <QDebug>
 
 namespace Ui {
 class Widget;

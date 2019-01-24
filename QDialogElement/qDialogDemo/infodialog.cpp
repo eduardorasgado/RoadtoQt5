@@ -35,10 +35,11 @@ void InfoDialog::on_pushButton_ok_clicked()
     }
 
     // when clicking ok quit the dialog
-    this->done(0);
+    accept();
 }
 
 void InfoDialog::on_pushButton_cancel_clicked()
 {
-
+    // the dialog has been rejected
+    reject();
 }
