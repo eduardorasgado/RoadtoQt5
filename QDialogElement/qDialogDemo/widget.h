@@ -2,6 +2,7 @@
 #define WIDGET_H
 
 #include <QWidget>
+#include "infodialog.h" // we should include the dialog manually
 
 namespace Ui {
 class Widget;
@@ -15,8 +16,12 @@ public:
     explicit Widget(QWidget *parent = nullptr);
     ~Widget();
 
+private slots:
+    void on_pushButton_provideinfo_clicked();
+
 private:
     Ui::Widget *ui;
+    InfoDialog *dialog;
 };
 
 #endif // WIDGET_H

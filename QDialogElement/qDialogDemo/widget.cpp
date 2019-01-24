@@ -12,3 +12,9 @@ Widget::~Widget()
 {
     delete ui;
 }
+
+void Widget::on_pushButton_provideinfo_clicked()
+{
+     dialog = new InfoDialog(this);
+     dialog->exec();
+}
