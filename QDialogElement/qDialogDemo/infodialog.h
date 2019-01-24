@@ -2,6 +2,8 @@
 #define INFODIALOG_H
 
 #include <QDialog>
+#include <QButtonGroup>
+#include <QDebug>
 
 namespace Ui {
 class InfoDialog;
@@ -15,8 +17,17 @@ public:
     explicit InfoDialog(QWidget *parent = nullptr);
     ~InfoDialog();
 
+private slots:
+    void on_pushButton_ok_clicked();
+
+    void on_pushButton_cancel_clicked();
+
 private:
     Ui::InfoDialog *ui;
+
+    QString position;
+    QString favorite_os;
+    QButtonGroup *os_group;
 };
 
 #endif // INFODIALOG_H
