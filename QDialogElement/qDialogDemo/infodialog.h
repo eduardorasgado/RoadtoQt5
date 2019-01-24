@@ -17,6 +17,10 @@ public:
     explicit InfoDialog(QWidget *parent = nullptr);
     ~InfoDialog();
 
+    QString getFavorite_os() const;
+
+    QString getPosition() const;
+
 private slots:
     void on_pushButton_ok_clicked();
 

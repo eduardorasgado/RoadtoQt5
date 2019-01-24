@@ -22,7 +22,12 @@ void Widget::on_pushButton_provideinfo_clicked()
      if(response == QDialog::Accepted)
      {
          //
-         qDebug() << "Dialog accepted";
+         QString position = dialog->getPosition();
+         QString os = dialog->getFavorite_os();
+         qDebug() << "Dialog accepted, position is: "
+                  << position
+                  << " | os is: "
+                  << os;
      }
      if(response == QDialog::Rejected)
      {

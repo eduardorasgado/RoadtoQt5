@@ -5,6 +5,7 @@ InfoDialog::InfoDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::InfoDialog)
 {
+    qDebug() << "Creating a dialog";
     ui->setupUi(this);
     // to have a better way to handle the radio buttons
     os_group = new QButtonGroup(this);
@@ -15,6 +16,7 @@ InfoDialog::InfoDialog(QWidget *parent) :
 
 InfoDialog::~InfoDialog()
 {
+    qDebug() << "Deleting the dialog";
     delete os_group;
     delete ui;
 }
@@ -42,4 +44,14 @@ void InfoDialog::on_pushButton_cancel_clicked()
 {
     // the dialog has been rejected
     reject();
+}
+
+QString InfoDialog::getPosition() const
+{
+    return position;
+}
+
+QString InfoDialog::getFavorite_os() const
+{
+    return favorite_os;
 }
