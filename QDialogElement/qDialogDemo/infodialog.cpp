@@ -2,7 +2,9 @@
 #include "ui_infodialog.h"
 
 InfoDialog::InfoDialog(QWidget *parent) :
-    QDialog(parent),
+    // we added both Qt options to avoid the appearing of a
+    // interrogant symbol in window, when app is running in windows OS
+    QDialog(parent, Qt::WindowSystemMenuHint | Qt::WindowTitleHint),
     ui(new Ui::InfoDialog)
 {
     qDebug() << "Creating a dialog";
@@ -12,6 +14,8 @@ InfoDialog::InfoDialog(QWidget *parent) :
     os_group->addButton(ui->radioButton_windows);
     os_group->addButton(ui->radioButton_linux);
     os_group->addButton(ui->radioButton_mac);
+
+    this->setWindowTitle("Your data");
 }
 
 InfoDialog::~InfoDialog()

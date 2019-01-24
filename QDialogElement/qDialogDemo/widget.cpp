@@ -61,6 +61,8 @@ void Widget::initDialogs()
     // non modal: works with signals
     dialog_non_modal = new InfoDialog(this);
 
+    //dialog->setWindowTitle("your data");
+
     // signals and slots approach
     connect(dialog_non_modal, &InfoDialog::accepted, [=](){
         //
@@ -74,7 +76,7 @@ void Widget::initDialogs()
         //
         qDebug() << "[Dialog non modal was rejected]";
         auto nodata = "<No Data Assigned>";
-        this->setLabelData(nodata);
+        this->setLabelData(nodata, nodata);
     });
 }
 
