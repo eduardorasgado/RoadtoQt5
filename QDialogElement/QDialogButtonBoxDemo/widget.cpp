@@ -38,8 +38,8 @@ void Widget::initDialogBoxes()
     connect(dialog, &InfoDialog::rejected, [=](){
         qDebug() << "Dialog Rejected";
         if(ui->label_container->text() == ""){
-            QMessageBox::critical(this, "Information",
-                                     "Please dont let the data field empty",
+            QMessageBox::warning(this, "Information",
+                                     "Please dont let the data field be empty",
                                      QMessageBox::Ok);
         }
     });
