@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "infodialog.h"
 #include <QDebug>
+#include <QMessageBox>
 
 namespace Ui {
 class Widget;

@@ -30,9 +30,17 @@ void Widget::initDialogBoxes()
     // connecting dialog signals
     connect(dialog, &InfoDialog::accepted,[=](){
         qDebug() << "Dialog Accepted";
+        // show data from dialog text box
+        auto d_content = dialog->getDial_content();
+        ui->label_container->setText(d_content);
     });
 
     connect(dialog, &InfoDialog::rejected, [=](){
         qDebug() << "Dialog Rejected";
+        if(ui->label_container->text() == ""){
+            QMessageBox::critical(this, "Information",
+                                     "Please dont let the data field empty",
+                                     QMessageBox::Ok);
+        }
     });
 }

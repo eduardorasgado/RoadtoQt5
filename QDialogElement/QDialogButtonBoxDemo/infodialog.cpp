@@ -33,11 +33,25 @@ void InfoDialog::on_buttonBox_clicked(QAbstractButton *button)
     DialogbuttonBoxHandler(stdButton);
 }
 
+QString InfoDialog::getDial_content() const
+{
+    return dial_content;
+}
+
 void InfoDialog::DialogbuttonBoxHandler(QDialogButtonBox::StandardButton &b)
 {
     //
     if(b == QDialogButtonBox::Save){
-        accept();
+        auto content = ui->textEdit->toPlainText(); // get content
+        if(content == ""){
+            QMessageBox::information(this, "Save your information",
+                                     "Box is empty, write something",
+                                     QMessageBox::Ok);
+        } else{
+            // if box is not empty
+            dial_content = content;
+            accept();
+        }
     }
     else if(b == QDialogButtonBox::Cancel){
         reject();
