@@ -43,10 +43,31 @@ void Widget::on_pushButton_textcolor_clicked()
 
 void Widget::on_pushButton_background_color_clicked()
 {
-    //
+    // changing backound color by picking up the window palette
+    // property
+    auto palette = ui->label->palette();
+    auto b_color = palette.color(QPalette::Window);
+
+    auto choosen_b_color = QColorDialog::getColor(b_color,
+                                                  this,
+                                                  "Choose background color");
+
+    if(choosen_b_color.isValid()){
+        palette.setColor(QPalette::Window, choosen_b_color);
+        ui->label->setPalette(palette);
+    }
 }
 
 void Widget::on_pushButton_font_clicked()
 {
     //
+    auto actualFont = ui->label->font();
+    bool ok;
+    auto font = QFontDialog::getFont(&ok,
+                                     actualFont,
+                                     this);
+    if(ok){
+        ui->label->setFont(font);
+    }
+
 }

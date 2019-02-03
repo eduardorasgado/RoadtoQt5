@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QColorDialog>
+#include <QFontDialog>
 #include <QDebug>
 
 namespace Ui {
