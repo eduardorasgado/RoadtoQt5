@@ -43,8 +43,24 @@ void Widget::on_pushButton_3_clicked()
     // getting one or more files at the same time
     QStringList files = QFileDialog::getOpenFileNames(
                 this, "Select one or more files to open",
-                "/home", "Images (*.png *.xml *.jpg)");
+                // this is a selecter filter, can filter any extension
+                // an more than one at the same time
+                "/home", "Images (*.png *.xml *.jpg);;"
+                         "Text files (*.txt);;"
+                         "XML files (*xml)");
     if(files.count() > 0){
         qDebug() << "FILE: " << files;
+    }
+}
+
+void Widget::on_pushButton_4_clicked()
+{
+    // just a save demo to learn how to use qfiledialog to
+    // save files
+    auto fileName = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                                 "/home/cheetos/untitled.png",
+                                                 tr("Images (*.jpg *.xpm *.png)"));
+    if(fileName != ""){
+        qDebug() << "FILE TO SAVE: " << fileName;
     }
 }
