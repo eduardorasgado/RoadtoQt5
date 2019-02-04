@@ -16,6 +16,9 @@ Widget::~Widget()
 void Widget::on_pushButton_clicked()
 {
     bool ok;
+
+    // we can use   QInputDialog::getText(); instead
+
     // getting data from user using a dialog
     auto data = QInputDialog::getDouble(this,
                                         // title
@@ -53,5 +56,25 @@ void Widget::on_pushButton_2_clicked()
                                          0, false, &ok);
     if(ok && !item.isEmpty()){
         qDebug() << "ACTUAL POSITION IS: " << item.toUtf8();
+    }
+}
+
+void Widget::on_pushButton_3_clicked()
+{
+    // set robot name
+    bool ok;
+
+    auto robotName = QInputDialog::getText(this,
+                                           // title
+                                           tr("Set Robot name"),
+                                           // input label
+                                           tr("Name"),
+                                           // line edit type
+                                           QLineEdit::Normal,
+                                           // default value
+                                           QDir::home().dirName(),
+                                           &ok);
+    if(ok && !robotName.isEmpty()){
+        qDebug() << "ROBOT NAME: " << robotName;
     }
 }
