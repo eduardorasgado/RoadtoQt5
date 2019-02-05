@@ -76,10 +76,7 @@ void Widget::on_pushButton_saveColors_clicked()
     // call persistence logic for all buttons
     for(auto &b : {1,2,3,4,5,6,7,8,9}){
         auto buttonName = QString("pushButton%1").arg(b);
-
-        if(b == 1){
-            saveColor(buttonName, colorList[b-1]);
-        }
+        saveColor(buttonName, colorList[b-1]);
         //qDebug() << buttonName;
     }
 }
@@ -87,6 +84,15 @@ void Widget::on_pushButton_saveColors_clicked()
 void Widget::on_pushButton_loadColors_clicked()
 {
     // load colors
+    // call persistence logic for all buttons
+    for(auto &b : {1,2,3,4,5,6,7,8,9}){
+        auto buttonName = QString("pushButton%1").arg(b);
+        auto stored_color = loadColor(buttonName);
+
+        // getting last color after close the app from QSettings
+        int position = b-1;
+        setButtonColorBackground(stored_color, position);
+    }
 }
 
 void Widget::setDefaultColors()
@@ -129,13 +135,7 @@ void Widget::getNewColor(int &position)
         // assigning new color to list
         colorList[position] = color;
 
-        // show color to button
-        // deffining a stylesheet property
-        QString css = QString("background-color: %1")
-                // .name return name in RGB format
-                .arg(color.name());
-
-        buttonList->at(position)->setStyleSheet(css);
+        setButtonColorBackground(color, position);
     }
 }
 
@@ -159,7 +159,31 @@ void Widget::saveColor(QString key, QColor color)
     color_settings.endGroup();
 }
 
-QColor Widget::loadColor(QString)
+QColor Widget::loadColor(QString key)
 {
+    int red, green, blue;
 
+    QSettings color_settings(companyName, applicationName);
+
+    color_settings.beginGroup(buttonGroupName);
+    // getting saved data and assigning it to button
+    // QVariant use to in case no value(default value instead)
+    red = color_settings.value(key+"r", QVariant(0)).toInt(); // key, and default value
+    green = color_settings.value(key+"g", QVariant(0)).toInt();
+    blue = color_settings.value(key+"b", QVariant(0)).toInt();
+    color_settings.endGroup();
+
+    // integrating the colors to get the real color rgb
+    return QColor(red, green, blue);
+}
+
+void Widget::setButtonColorBackground(QColor& color, int& position)
+{
+    // show color to button
+    // deffining a stylesheet property
+    QString css = QString("background-color: %1")
+            // .name return name in RGB format
+            .arg(color.name());
+
+    buttonList->at(position)->setStyleSheet(css);
 }

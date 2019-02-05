@@ -59,6 +59,7 @@ private:
     void getNewColor(int&);
     void saveColor(QString, QColor);
     QColor loadColor(QString);
+    void setButtonColorBackground(QColor&, int&);
 };
 
 #endif // WIDGET_H
