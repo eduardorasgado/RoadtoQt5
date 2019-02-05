@@ -100,7 +100,10 @@ void Widget::setDefaultColors()
     for(auto i : {1,2,3,4,5,6,7,8,9}){
         // fill list with buttons number of elements and black color
         // as value
-        colorList.push_back(Qt::black);
+        auto buttonName = QString("pushButton%1").arg(i);
+        auto stored_color = loadColor(buttonName);
+
+        colorList.push_back(stored_color);
     }
 
     for(auto &c : colorList){
