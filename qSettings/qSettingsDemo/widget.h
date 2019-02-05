@@ -7,6 +7,7 @@
 #include <QButtonGroup>
 #include <QDebug>
 #include <QColorDialog>
+#include <QSettings>
 
 namespace Ui {
 class Widget;
@@ -45,6 +46,10 @@ private slots:
 
 private:
     Ui::Widget *ui;
+    // default data for QSettings
+    QString companyName{"com"};
+    QString applicationName{"qSettingsDemo"};
+    QString buttonGroupName{"ButtonColor"};
     // to store initial button colors
     QList<QColor> colorList;
     QList<QWidget*> *buttonList;
@@ -52,6 +57,8 @@ private:
     void setDefaultColors();
     void initButtonList();
     void getNewColor(int&);
+    void saveColor(QString, QColor);
+    QColor loadColor(QString);
 };
 
 #endif // WIDGET_H

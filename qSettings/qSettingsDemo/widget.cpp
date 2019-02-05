@@ -73,12 +73,20 @@ void Widget::on_pushButton9_clicked()
 
 void Widget::on_pushButton_saveColors_clicked()
 {
+    // call persistence logic for all buttons
+    for(auto &b : {1,2,3,4,5,6,7,8,9}){
+        auto buttonName = QString("pushButton%1").arg(b);
 
+        if(b == 1){
+            saveColor(buttonName, colorList[b-1]);
+        }
+        //qDebug() << buttonName;
+    }
 }
 
 void Widget::on_pushButton_loadColors_clicked()
 {
-
+    // load colors
 }
 
 void Widget::setDefaultColors()
@@ -129,4 +137,29 @@ void Widget::getNewColor(int &position)
 
         buttonList->at(position)->setStyleSheet(css);
     }
+}
+
+void Widget::saveColor(QString key, QColor color)
+{
+    // grabbing g, r, b
+    int red = color.red();
+    int green = color.green();
+    int blue = color.blue();
+
+    // data persistence
+    // company name, application name
+    QSettings color_settings(companyName, applicationName);
+
+    color_settings.beginGroup(buttonGroupName);
+    // doing all the persistence thing
+    color_settings.setValue(key + "r", red); // name("button1r"), color
+    color_settings.setValue(key + "g", green);
+    color_settings.setValue(key + "b", blue);
+
+    color_settings.endGroup();
+}
+
+QColor Widget::loadColor(QString)
+{
+
 }
